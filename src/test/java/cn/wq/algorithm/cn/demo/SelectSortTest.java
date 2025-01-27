@@ -23,21 +23,19 @@ public class SelectSortTest {
      */
     @Test
     void test() {
-        Integer[] arr = {1, 9, 4, -1, 88, 10};
+        int[] arr = {1, 9, 4, -1, 88, 10};
         int start = 0;
         int min = 0;
+
         while (true) {
             for (int i = start; i < arr.length; i++) {
-                if (arr[min] > arr[i]) {
-                    min = i;
-                }
+                min = arr[min] > arr[i] ? i : min;
             }
             if (start == arr.length - 1) {
                 break;
             }
-            int a = arr[start];
-            arr[start] = arr[min];
-            arr[min] = a;
+            swap(arr, start, min);
+
             start += 1;
             min = start;
 
