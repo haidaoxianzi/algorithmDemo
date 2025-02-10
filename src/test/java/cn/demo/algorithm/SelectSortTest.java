@@ -1,8 +1,14 @@
-package cn.wq.algorithm.cn.demo;
+package cn.demo.algorithm;
 
+import cn.demo.algorithm.SelectionSort;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @Auther: gina
@@ -109,5 +115,96 @@ public class SelectSortTest {
         int tmp1 = arr[j];
         arr[j] = arr[i];
         arr[i] = tmp1;
+    }
+
+
+    /**
+     * 对数器
+     * 测试升级：
+     * 1、产生足够多的数据样本，根据数据对比结果，进而验证算法逻辑正确性:设置执行50次，并发线程数3
+     * 2、使用自己写的算法得到的结果，跟正确结果做对比，验证算法结果是否正确
+     */
+    private final static ReentrantLock lock = new ReentrantLock();
+    private static int count = 0;
+
+    //加锁实现计数器：ReentrantLock
+    @Test(invocationCount = 150, threadPoolSize = 3)
+    void testCheckedData() {
+        lock.lock();
+        ++count;
+        int[] arr = genSampleData();
+        int[] arr2 = new int[10000];
+        System.arraycopy(arr, 0, arr2, 0, 10000);
+
+        Arrays.sort(arr);
+        SelectionSort.selectionSort(arr2);
+        boolean isTrue = true;
+        for (int i = 0; i < 10000; i++) {
+            isTrue = arr2[i] != arr[i] ? false : true;
+            if (!isTrue) {
+                break;
+            }
+        }
+        log.info("次数：{} ,算法正确吗？{}", count, isTrue);
+        lock.unlock();
+    }
+
+    //atomicInteger 做并发场景计数器
+    private static AtomicInteger atomicInteger = new AtomicInteger(0);
+
+    /**
+     * 作废
+     */
+    @Test(invocationCount = 10, threadPoolSize = 3)
+    void testCheckedData2() {
+
+        int[] arr = genSampleData();
+        int[] arr2 = new int[10000];
+        System.arraycopy(arr, 0, arr2, 0, 10000);
+
+        Arrays.sort(arr);
+        SelectionSort.selectionSort(arr2);
+        boolean isTrue = true;
+        for (int i = 0; i < 10000; i++) {
+            isTrue = arr2[i] != arr[i] ? false : true;
+            if (!isTrue) {
+                break;
+            }
+        }
+        log.info("次数：{} ,算法正确吗？{}", atomicInteger.get(), isTrue);
+
+    }
+
+    //产生随机样本
+    int[] genSampleData() {
+        int[] arr = new int[10000];
+        Random r = new Random();
+        for (int i = 0; i < 10000; i++) {
+            arr[i] = r.nextInt();
+        }
+        return arr;
+    }
+
+    //方式四：选择排序
+    @Test
+    void testSelectSort() {
+        int arr[] = { 1, 7, 2, 9, 2,4, 0, -1, 88};//
+        //1、首先考虑边界值
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+
+        //1～n-1，2～n-1
+        for (int i = 0; i < arr.length; i++) {
+            int minPos = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                minPos = arr[minPos] > arr[j] ? j : minPos;
+            }
+            swap(arr, i, minPos);
+        }
+
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
     }
 }

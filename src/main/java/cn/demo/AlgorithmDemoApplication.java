@@ -1,4 +1,4 @@
-package cn.wq.algorithm;
+package cn.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

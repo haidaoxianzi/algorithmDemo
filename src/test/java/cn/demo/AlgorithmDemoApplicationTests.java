@@ -1,4 +1,4 @@
-package cn.wq.algorithm;
+package cn.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
