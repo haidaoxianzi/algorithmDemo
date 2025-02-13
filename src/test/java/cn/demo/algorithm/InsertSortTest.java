@@ -22,7 +22,7 @@ public class InsertSortTest {
     }
 
     //插入排序
-    void insertSort(int[] arr) {
+   public static void insertSort(int[] arr) {
 
         for (int end = 1; end < arr.length; end++) {
             for (int pre = end - 1; pre - 1 >= 0 && arr[pre - 1] > arr[pre]; pre--) {
@@ -31,7 +31,7 @@ public class InsertSortTest {
         }
     }
 
-    void swap(int[] arr, int i, int j) {
+    static void swap(int[] arr, int i, int j) {
         int tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = tmp;

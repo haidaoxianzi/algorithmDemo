@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 /**
  * @Auther: gina
  * @Date: 2025-02-08
- * @Description: 1!+2!+3!+...+N!
+ * @Description: 计算阶乘加和：1!+2!+3!+...+N!
  */
 @SpringBootTest
 public class JieChengSumTest {
