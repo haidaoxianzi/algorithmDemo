@@ -23,6 +23,13 @@ BubbleSortTestNew
 InsertSortTest
 # todo
 特点：
+从前往后遍历，遇到后面元素>前面元素，进行置换。
+
+# 4、二分法查找
+HalfSelectTest
+
+
+
 
 # 计算题练习
 # 1、计算数组 位置l～R的累加和。
@@ -45,3 +52,6 @@ RandomPercentageTest
 # 5、对数器
 # 数组长度和元素值都是随机的，测试时给个最大长度和元素最大值
 CheckToolTest
+
+# 6、练习二分法
+有序数组中找到 =num 最左的位置

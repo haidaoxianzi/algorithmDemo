@@ -37,7 +37,7 @@ public class CheckToolTest {
 
     }
 
-    void print(int[] arr) {
+    public static void print(int[] arr) {
         for (int i : arr) {
             System.out.print(i + " ");
         }
@@ -48,7 +48,7 @@ public class CheckToolTest {
      * step1、获取数组
      * 根据给定数组最大长度和数组元素最大值，获取一个长度和元素值都随机的数组
      */
-    int[] randomArray(int maxLen, int maxValue) {
+   public static int[] randomArray(int maxLen, int maxValue) {
         int arrLen = (int) (Math.random() * maxLen)+1;
         int[] arr = new int[arrLen];
         for (int i = 0; i < arrLen; i++) {
