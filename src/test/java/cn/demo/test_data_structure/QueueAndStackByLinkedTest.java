@@ -71,9 +71,9 @@ public class QueueAndStackByLinkedTest {
                /* cur = tail.next;
                 tail = cur;*/
 
-               // demo里是这个值
+                // demo里是这个值
                 tail.next = cur;
-                tail = cur;
+                tail = cur;//tail引用，指向cur的内容
             }
             size++;
         }
@@ -91,22 +91,6 @@ public class QueueAndStackByLinkedTest {
         //栈：后进先出，用链表存储，则进来的元素作为head节点，出去直接获取头节点数据即可，所以只需要一个节点指针
         private LinkedNode<V> head;
         private int size;
-
-        public MyStack(){
-            size=0;
-            head=null;
-        }
-        //是否为空
-        public boolean isEmpty() {
-            return size == 0;
-        }
-
-        //获取size的值
-        public int size() {
-            return size;
-        }
-
-
         //新增元素
         public void push(V v) {
             LinkedNode<V> cur = new LinkedNode<>(v);
@@ -115,9 +99,8 @@ public class QueueAndStackByLinkedTest {
                 // cur = head.next;//todo 这里我写错了，不应该是cur存储头节点里的指针
                 cur.next = head;//todo cur插入头节点，应该是cur.next指向head
             }
-            head = cur;
+            head = cur;//让头节点存储当前节点。【当前节点作为新的头】
         }
-
         //弹出元素
         public V pop() {
             V ans = null;
@@ -130,11 +113,27 @@ public class QueueAndStackByLinkedTest {
             }
             return ans;
         }
-
         // 下一次弹出元素的值
         public V peek() {
             return head != null ? head.v : null;
         }
+
+
+        public MyStack() {
+            size = 0;
+            head = null;
+        }
+
+        //是否为空
+        public boolean isEmpty() {
+            return size == 0;
+        }
+
+        //获取size的值
+        public int size() {
+            return size;
+        }
+
 
     }
 
@@ -181,14 +180,14 @@ public class QueueAndStackByLinkedTest {
 
         }
         if (!myStack.isEmpty()) {
-            System.out.println(myStack.peek() .equals( stack.peek()) ? "" : "Error");
+            System.out.println(myStack.peek().equals(stack.peek()) ? "" : "Error");
         }
         System.out.println("测试结束！");
     }
 
     @Test
     public static void testQueue() {
-        int testTimes =   10000;
+        int testTimes = 10000;
         int maxValue = 20000;
         MyQueue<Integer> myQueue = new MyQueue();
         Queue<Integer> queue = new LinkedList();

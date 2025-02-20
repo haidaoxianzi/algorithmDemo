@@ -9,11 +9,8 @@ import org.testng.annotations.Test;
  * @Description:题：单链表反转
  */
 @SpringBootTest
-public class SingleLinkTest {
-    @Test
-    void test() {
+public class  SingleLinkTest{
 
-    }
 
     public class Node {
         private int value;
@@ -32,7 +29,7 @@ public class SingleLinkTest {
             next = head.next;//head.next指针放在next节点存储，含义：next指向了头节点的下个节点
             head.next = pre;//head.next指针指向pre
             pre = head;//pre节点存储head节点内容
-            head = next;//head节点空出来存储next节点内容
+            head = next;//head节点空出来，存储next节点内容
         }
         return pre;
     }
